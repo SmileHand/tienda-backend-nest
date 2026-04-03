@@ -8,7 +8,7 @@ export const databaseProviders = [
                 type: 'mysql',
                 host: process.env.HOST,
                 port: parseInt(process.env.PORTDB ?? '80',10),
-                username: process.env.USERNAME,
+                username: process.env.USERNAMEP,
                 database: process.env.DATABASE,
                 entities: [__dirname+'/../**/*.entity{.ts,.js}',],
                 synchronize: true,
