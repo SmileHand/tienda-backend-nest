@@ -13,6 +13,8 @@ export class UsuariosService {
     const usua = new Usuario()
     usua.nombreUsuario = createUsuarioDto.nombreUsuario;
     usua.email = createUsuarioDto.email;
+
+
     return 'This action adds a new usuario';
   }
 
