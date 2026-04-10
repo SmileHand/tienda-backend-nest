@@ -11,7 +11,6 @@ export class Usuario {
     email!: string;
     @Column('text')
     hash_pass!: string;
-
     @Column()
     esAdmin!:boolean;
 }
