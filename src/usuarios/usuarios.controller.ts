@@ -1,9 +1,10 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards } from '@nestjs/common';
 import { UsuariosService } from './usuarios.service';
 import { CreateUsuarioDto } from './dto/create-usuario.dto';
 import { UpdateUsuarioDto } from './dto/update-usuario.dto';
 import { ApiOperation } from '@nestjs/swagger';
 import { LogginDto } from './dto/loggin.dto';
+import { AuthGuard } from 'src/auth/auth.guard';
 
 @Controller('usuarios')
 export class UsuariosController {
@@ -26,6 +27,7 @@ export class UsuariosController {
     return this.usuariosService.findAll();
   }
 
+  @UseGuards(AuthGuard)
   @ApiOperation({
     summary:'hacer admin',
     description: 'este endpoint hara admin al usuario deseado'

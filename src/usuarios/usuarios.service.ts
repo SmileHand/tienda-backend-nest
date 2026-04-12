@@ -1,4 +1,4 @@
-import { Inject, Injectable } from '@nestjs/common';
+import { Inject, Injectable, NotFoundException } from '@nestjs/common';
 import { CreateUsuarioDto } from './dto/create-usuario.dto';
 import { UpdateUsuarioDto } from './dto/update-usuario.dto';
 import { DataSource } from 'typeorm';
@@ -57,13 +57,19 @@ export class UsuariosService {
       }
     })
     if (!usua){
-      throw new Error('verifique que el correo');
+      throw new NotFoundException('verifique que el correo');
     }
     const comparar = await bcrypt.compare(datos.pass,usua.hash_pass);
     if(!comparar){
-      throw new Error('la contraseña es incorrecta');
+      throw new NotFoundException('la contraseña es incorrecta');
     }
-    return usua;
+    
+    const result ={
+      nombreUsuario: usua.nombreUsuario,
+      email: usua.email,
+      ad: usua.esAdmin
+    }
+    return result;
   }
 
   findOne(id: number) {
