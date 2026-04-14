@@ -6,10 +6,11 @@ import { Usuario } from './entities/usuario.entity';
 import * as bcrypt from 'bcrypt';
 import { LogginDto } from './dto/loggin.dto';
 import { error } from 'console';
+import { JwtService } from '@nestjs/jwt';
 
 @Injectable()
 export class UsuariosService {
-  constructor(@Inject('DATA SOURCE') private datos:DataSource){}
+  constructor(@Inject('DATA SOURCE') private datos:DataSource, private jwtService:JwtService){}
   async create(createUsuarioDto: CreateUsuarioDto) {
     const usu = this.datos.getRepository(Usuario)
     const usua = new Usuario()
@@ -69,7 +70,8 @@ export class UsuariosService {
       email: usua.email,
       ad: usua.esAdmin
     }
-    return result;
+
+    return {access_token: this.jwtService.sign(result)};
   }
 
   findOne(id: number) {

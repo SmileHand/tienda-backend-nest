@@ -2,7 +2,7 @@ import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards } from '@n
 import { UsuariosService } from './usuarios.service';
 import { CreateUsuarioDto } from './dto/create-usuario.dto';
 import { UpdateUsuarioDto } from './dto/update-usuario.dto';
-import { ApiOperation } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiOperation } from '@nestjs/swagger';
 import { LogginDto } from './dto/loggin.dto';
 import { AuthGuard } from 'src/auth/auth.guard';
 
@@ -28,6 +28,7 @@ export class UsuariosController {
   }
 
   @UseGuards(AuthGuard)
+  @ApiBearerAuth()
   @ApiOperation({
     summary:'hacer admin',
     description: 'este endpoint hara admin al usuario deseado'

@@ -10,6 +10,8 @@ async function bootstrap() {
   const config = new DocumentBuilder()
   .setTitle('Backend de tienda')
   .setDescription('Este backend documentara los endpoints del proyecto de titulacion')
+  .setBasePath('http://localhost:3001')
+  .addBearerAuth()
   .build();
   const documentFactory = () => SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api', app,documentFactory)
