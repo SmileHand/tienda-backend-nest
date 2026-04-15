@@ -71,7 +71,11 @@ export class UsuariosService {
       ad: usua.esAdmin
     }
 
-    return {access_token: this.jwtService.sign(result)};
+    return {
+      access_token: this.jwtService.sign(result),
+      nombre_usuario: usua.nombreUsuario,
+      email: usua.email
+    };
   }
 
   findOne(id: number) {
